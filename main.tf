@@ -15,26 +15,19 @@ terraform {
 
 # Configure the AWS Provider
 provider "aws" {
-  region     = var.aws_region
-  access_key = var.aws_access_key
-  secret_key = var.aws_secret_key
 }
 
 # Create a VPC
 module "vpc" {
-  source       = "./aws_vpc/"
-  cidr_network = "192.168.0.0/16"
+  source       = "github.com/seunghyun-2/tf-aws_vpc.git"
 }
 
 module "subnet" {
-  source     = "./aws_subnet/"
-  cidr_block = "192.168.0.0/24"
-  vpc_id     = module.vpc.vpc_id
+  source     = "github.com/seunghyun-2/tf-aws_subnet.git"
 }
 
 module "keypair" {
-  source   = "./aws_keypair/"
-  key_name = "terra_gen_key"
+  source   = "github.com/seunghyun-2/tf-aws_keypair.git"
 }
 
 # resource "aws_subnet" "terra_private_subnet" {
